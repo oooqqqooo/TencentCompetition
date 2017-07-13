@@ -33,12 +33,13 @@ def encoding():
     enc = OneHotEncoder(handle_unknown='ignore')
     feats = ['age','gender','education','appID', 'telecomsOperator', 'marriageStatus','residence','creativeID','haveBaby','hometown','camgaignID','countNum','actionNum',"advertiserID",'positionID']
     for i,feat in enumerate(feats):
-        # if (feat =='count' or feat == 'actionNum'):
-        #     x_train = dfTrain[feat].values.reshape(-1, 1)
-        #     x_test = dfTest[feat].values.reshape(-1, 1)
-        # else:
-        x_train = enc.fit_transform(dfTrain[feat].values.reshape(-1, 1))
-        x_test = enc.transform(dfTest[feat].values.reshape(-1, 1))
+        
+        if (feat =='countNume' or feat == 'actionNum' or feat == 'age'):
+            x_train = dfTrain[feat].values.reshape(-1, 1)
+            x_test = dfTest[feat].values.reshape(-1, 1)
+        else:
+            x_train = enc.fit_transform(dfTrain[feat].values.reshape(-1, 1))
+            x_test = enc.transform(dfTest[feat].values.reshape(-1, 1))
         if i == 0:
             X_train, X_test = x_train, x_test
         else:
